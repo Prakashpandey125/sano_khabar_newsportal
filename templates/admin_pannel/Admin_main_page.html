@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+{% load mptt_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'css/admin_pannel/added_title_sub_page.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-6.0.0-beta3-web/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_pannel/navbar.css' %}">
+    <title>News</title>
+    <script src="{% static 'js/admin_pannel.js' %}"></script>
+</head>
+<body>
+<div class="newsportal_adminpannel_maincontainer">
+    <!-- navbar starts -->
+    <div class="npap_header_container">
+        <div class="npap_col1">
+            <div class="npap_logo">
+                <img src="{% static 'media/image/new news logo.png' %}" class="np_nav_header_logo_center" alt="image"/>
+            </div>
+        </div>
+        <!-- Navigation Bar start  -->
+        <div class="npap_col2">
+            <div class="npap_nav_header_navbar">
+                <div class="npap_nav_header_navbar_list">
+                    <div class="npap_list_dashboard">
+                        <a href="{% url 'ap_index' %}">Dashboard</a>
+                    </div>
+                    <div class="npap_list_nepalinews npap_active">
+                        <a href="{% url 'ap_layout_page' %}">Nepali News</a>
+                    </div>
+                    <div class="npap_list_englishnews">
+                        <a href="#">English News</a>
+                    </div>
+                    <div class="npap_list_aboutus">
+                        <a href="#">About Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation Bar End -->
+        <div class="npap_col3">
+            <div class="npap_bell">
+                <img src="{% static 'media/image/icons8-bell-100.png' %}" alt=""/>
+            </div>
+            <div class="npap_settings">
+                <img src="{% static 'media/image/icons8-setting-96.png' %}" alt=""/>
+            </div>
+            <div class="npap_profile">
+                <img src="{% static 'media/image/CYMERA_20170520_172428-1.jpg' %}" alt=""/>
+            </div>
+        </div>
+    </div>
+    <!-- navbar ends -->
+
+    {% include 'admin pannel/latestnews/index.html' %}
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% load static %}
+<div class="np_hnews_container">
+    <div class="np_hnews_content">
+        <!-- first container containing heading and the hr -->
+        <div class="np_hnews_heading">
+            <span>मुख्य समाचार</span>
+            <hr color="red" noshade/>
+        </div>
+        <!-- code copied from the front news section which is the second conatiner here-->
+
+        <div class="np_fnews_container">
+            <div class="np_fnews_imagepart">
+                <img src="{{main_news_query1.standard_news.photo_img.url}}" alt=""/>
+                <!-- code for the mobile form to be displayed start here-->
+                <div class="mobile_content">
+                    <div class="np_fnews_description_mhead_mobile">
+                        <h1>{{main_news_query1.standard_news.title}}</h1>
+                    </div>
+                    <div class="np_fnews_description_lr_time_mobile">
+                        <i class="far fa-clock" style="font-size: 17px"></i>
+                        <p>५ मिनट अगाडि</p>
+                    </div>
+                </div>
+                <!-- code for the mobile form to be displayed ends here -->
+            </div>
+
+            <!-- html code for the description part starts here -->
+            <div class="np_fnews_description">
+                <div class="np_fnews_description_mhead">
+                    <h1>{{main_news_query1.standard_news.title}}</h1>
+                </div>
+                <div class="np_fnews_description_mnews">
+                    <p>{{main_news_query1.standard_news.news_summary}}</p>
+                </div>
+                <div class="np_fnews_description_lr">
+                    <div class="np_fnews_description_lr_time">
+                        <i class="far fa-clock" style="font-size: 17px"></i>
+                        <p>५ मिनट अगाडि</p>
+                    </div>
+                    <div class="np_fnews_description_lr_ac">
+                        <a href="">थप हेर्नुहोस</a>
+                    </div>
+                </div>
+            </div>
+            <!-- html code for the description part ends here -->
+        </div>
+
+        <!-- code for the extra 3 small news and the last container-->
+        <div class="np_hnews_last_container">
+            <div class="np_hnews_last_news">
+                {% for i in main_news_query2 %}
+                <!-- first column -->
+                <div class="np_manoranjan_container" id="first_column">
+                    <div class="np_manoranjan_imagepart">
+                        <img src="{{i.standard_news.photo_img.url}}" alt=""/>
+                    </div>
+                    <div class="np_manoranjan_description">
+                        <div class="np_manoranjan_mhead">
+                            <h1>{{i.standard_news.title}}</h1>
+                        </div>
+                        <div class="np_manoranjan_lr">
+                            <i class="far fa-clock" style="font-size: 17px"></i>
+                            <p>५ मिनट अगाडि</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="np_tk_container_content">
+        <div class="np_hnews_heading">
+            <span>ताजा समाचार</span>
+            <hr color="red" noshade/>
+        </div>
+        {% for i in news_query %}
+        <div class="np_tk_snews_container">
+            <div class="np_tk_snews_imagepart">
+                <img src="{{i.photo_img.url}}" alt=""/>
+            </div>
+            <div class="np_tk_snews_description_mtitle">
+                <h1>{{i.title}}</h1>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,59 @@
+{%load static %}
+<div class="np_artha_primecontainer">
+    <div class="np_artha_news_ads_flex">
+        <div class="np_artha_maincontainer">
+            <div class="np_artha_heading">
+                <h4>{{first_section21.category.name}} </h4>
+            </div>
+            <div class="np_artha_newspart">
+                <!-- news left part starts-->
+                <div class="np_artha_newspart_left">
+                    <a href="#">
+                        <div class="np_artha_newspart_left_small_container">
+                            <div class="np_artha_newspart_left_small_container_image">
+                                <img src={{first_section21.photo_img.url}} alt="" />
+                            </div>
+                            <div class="np_artha_newspart_left_small_container_description">
+                                <h1>न{{first_section21.title}}
+                                </h1>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="np_artha_newspart_right_small_container">
+                            <div class="np_artha_newspart_right_small_container_image">
+                                <img src={{first_section22.photo_img.url}} alt="" />
+                            </div>
+                            <div class="np_artha_newspart_right_small_container_description">
+                                <h1>{{first_section22.title}}
+                                </h1>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- news left part  ends-->
+
+                <!-- news right part starts -->
+                <div class="np_artha_newspart_right">
+                      {% for i in section2_section2 %}
+                    <a href="#">
+                        <div class="np_artha_newspart_right_small_container">
+                            <div class="np_artha_newspart_right_small_container_image">
+                                <img src={{i.photo_img.url}} alt="" />
+                            </div>
+                            <div class="np_artha_newspart_right_small_container_description">
+                                <h1>{{i.title}}
+                                </h1>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+
+                </div>
+
+                <!-- news right part ends -->
+            </div>
+        </div>
+        {% comment %} {% include "ads3.html"%} {% endcomment %}
+    </div>
+</div>

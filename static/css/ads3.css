@@ -1,0 +1,23 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.np_add3_container {
+    width: 90%;
+    height: 100%;
+    margin: 20px;
+}
+
+.add3_eachadd {
+    width: 320px;
+    height: 200px;
+    border: 1px solid gray;
+    margin: 15px;
+}
+
+.add3_eachadd p {
+    text-align: center;
+}
