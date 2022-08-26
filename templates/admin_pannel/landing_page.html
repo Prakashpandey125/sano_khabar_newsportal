@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static  'css/admin_pannel/layout_page.css' %}" />
     <link rel="stylesheet" href="{% static 'css/admin_pannel/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_pannel/sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'fontawesome-free-6.0.0-beta3-web/css/all.css' %}">
     <title>Landing_Page</title>
     <script src="{% static 'js/admin_pannel.js' %}"></script>
@@ -23,7 +24,7 @@
         <!-- navbar ends -->
 
         <!-- sidebar starts -->
-                {% include 'admin_pannel/sidebar.html' %}
+                {% include 'admin_pannel/sidebar.html' with title_pager=title_high %}
 
         <!-- sidebar ends -->
         <!-- mainbody starts -->

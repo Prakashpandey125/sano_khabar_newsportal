@@ -44,15 +44,10 @@ def ap_dashboard(request):
     return render(request, 'admin_pannel/AdminPanel_dashboard.html')
 
 
-def ap_layout_page(request):
-    category_query = Category.objects.all().order_by('-id')
-    context = {'category_query': category_query}
-    return render(request, 'admin_pannel/landing_page.html', context)
-
-
 def ap_landing_page(request):
     category_query = Category.objects.all()
-    context = {'category_query': category_query}
+    title_high = "Layout"
+    context = {'category_query': category_query, 'title_high':title_high}
     return render(request, 'admin_pannel/AdminPanel_landingpage.html', context)
 
 
@@ -63,7 +58,6 @@ def ap_add_more_tittle(request):
     category_query = Category.objects.all()
     form = AddCategoryNepali()
     context = {'category_query': category_query, 'form': form}
-    # context = {'category_query': category_query, 'form': form , 'category_id':ids}
     return render(request, 'admin_pannel/AdminPanel_addmoretitle.html', context)
 
 
@@ -100,8 +94,8 @@ def add_more_post(request):
 
 def ap_layout_page(request):
     category_query = Category.objects.filter(level=0).order_by('-id')
-    context = {'category_query': category_query}
-
+    title_high = "Layout"
+    context = {'category_query': category_query, 'title_high':title_high}
     return render(request, 'admin_pannel/landing_page.html', context)
 
 
@@ -117,6 +111,7 @@ def ap_sanghiya_page(request):
 def ap_youtube(request):
     category_query = Category.objects.all().order_by('-id')
     youtube_query = YoutubeLink.objects.all().order_by('-id')
+    title_high = "Youtube"
     context = {'youtube_query': youtube_query,
                'category_query': category_query}
     return render(request, 'admin_pannel/youtube/youtube_page.html', context)
@@ -128,9 +123,10 @@ def ap_youtube(request):
 def ap_add_youtube(request):
     category_query = Category.objects.all()
     youtube_query = YoutubeLink.objects.all().order_by('-id')
+    title_high = "Youtube"
     form = EditYoutube()
     context = {'category_query': category_query,
-               'youtube_query': youtube_query, 'form': form}
+               'youtube_query': youtube_query, 'form': form, 'title_high':title_high}
     return render(request, 'admin_pannel/youtube/add_youtube_news.html', context)
 
 
@@ -158,7 +154,8 @@ def ap_add_youtube_news(request):
 def edit_youtube_page(request, ids):
     youtube_query = YoutubeLink.objects.get(id=ids)
     form = EditYoutube(instance=youtube_query)
-    context = {'form': form, 'youtube_query': youtube_query}
+    title_high = "Youtube"
+    context = {'form': form, 'youtube_query': youtube_query, 'title_high':title_high}
     return render(request, 'admin_pannel/youtube/edit_youtube.html', context)
 
 
@@ -192,16 +189,6 @@ def delete_youtube_page(request, ids):
 
 # Youtube Section Ends
 
-
-def ap_edit_breaking_news_page(request, ids):
-    category_query = Category.objects.all()
-    breaking_news_query = BreakingNews.objects.get(id=ids)
-    form = EditBreakingNews(instance=breaking_news_query)
-    context = {'form': form, 'breaking_news_query': breaking_news_query,
-               'category_query': category_query}
-    return render(request, 'admin_pannel/breaking_news/edit_breaking_news.html', context)
-
-
 def edit_breaking_news_page_post(request, ids):
     if request.method == 'POST':
         form = EditBreakingNews(request.POST)
@@ -224,12 +211,10 @@ def edit_breaking_news_page_post(request, ids):
 
 def ap_main_news_page(request):
     category_query = Category.objects.all()
-
     main_news_query = MainNews.objects.all().order_by('-id')
-    
-
+    title_high = "Main_News"
     context = {'category_query': category_query,
-               'main_news_query': main_news_query}
+               'main_news_query': main_news_query, 'title_high':title_high}
     return render(request, 'admin_pannel/main_news/index.html', context)
 
 
@@ -237,9 +222,9 @@ def ap_latest_news_page(request):
     category_query = Category.objects.all()
     news_query = StandardNews.objects.all().order_by('-id')
     form = EditNews(request.POST)
-    
+    title_high = "Latest_News"
     context = {'category_query': category_query,
-               'news_query': news_query, 'form':form}
+               'news_query': news_query, 'form':form, 'title_high' : title_high }
     return render(request, 'admin_pannel/latestnews/index.html', context)
 
 
@@ -262,17 +247,19 @@ def ap_edit_news_page(request, ids):
 def ap_breaking_news_listpage(request):
     category_query = Category.objects.all()
     breaking_query = BreakingNews.objects.all().order_by('-id')
+    title_high = "Breaking"
     context = {'category_query': category_query,
-               'breaking_query': breaking_query}
+               'breaking_query': breaking_query, 'title_high':title_high}
     return render(request, 'admin_pannel/breaking_news/breaking_news_page.html', context)
 
 
 def ap_add_breaking_news(request):
     category_query = Category.objects.all()
     breaking_query = BreakingNews.objects.all().order_by('-id')
+    title_high = "Breaking"
     form = EditBreakingNews()
     context = {'category_query': category_query,
-               'breaking_query': breaking_query, 'form': form}
+               'breaking_query': breaking_query, 'form': form, 'title_high':title_high}
     return render(request, 'admin_pannel/breaking_news/add_breaking_news.html', context)
 
 
@@ -296,9 +283,10 @@ def ap_add_breaking_news_post(request):
 def ap_edit_breaking_news_page(request, ids):
     category_query = Category.objects.all()
     breaking_news_query = BreakingNews.objects.get(id=ids)
+    title_high = "Breaking"
     form = EditBreakingNews(instance=breaking_news_query)
     context = {'form': form, 'breaking_news_query': breaking_news_query,
-               'category_query': category_query}
+               'category_query': category_query, 'title_high':title_high}
     return render(request, 'admin_pannel/breaking_news/edit_breaking_news.html', context)
 
 
@@ -357,16 +345,12 @@ def add_main_news_btn(request):
 
 
 # adding_adds
-def edit_ads(request):
-    category_query = Category.objects.all()
-    context = {'category_query': category_query}
-    return render(request, 'admin_pannel/ads/edit_ads.html', context)
-
 
 def ads_list_page(request):
     category_query = Category.objects.all()
     ads_query = Advertisement.objects.all().order_by('-id')
-    context = {'category_query': category_query, 'ads_query': ads_query}
+    title_high = "Advertisement"
+    context = {'category_query': category_query, 'ads_query': ads_query, 'title_high':title_high}
     return render(request, 'admin_pannel/ads/for_adds.html', context)
 
 
@@ -374,8 +358,9 @@ def add_adds(request):
     category_query = Category.objects.all()
     ads_query = Advertisement.objects.all().order_by('-id')
     form = Advertisement_Form(request.POST)
+    title_high = "Advertisement"
     context = {'category_query': category_query,
-               'ads_query': ads_query, 'form': form}
+               'ads_query': ads_query, 'form': form, 'title_high':title_high}
     return render(request, 'admin_pannel/ads/add_ads.html', context)
 
 
@@ -403,8 +388,9 @@ def edit_ads(request, ids):
     category_query = Category.objects.all()
     ads_query = Advertisement.objects.get(id=ids)
     form = Advertisement_Form(instance=ads_query)
+    title_high = "Advertisement"
     context = {'form': form, 'ads_query': ads_query,
-               'category_query': category_query}
+               'category_query': category_query, 'title_high':title_high}
     return render(request, 'admin_pannel/ads/edit_ads.html', context)
 
 
@@ -437,8 +423,9 @@ def delete_ads_page(request, ids):
 
 def ap_titles_name(request):
     category_query = Category.objects.all()
+    title_high = "Layout"
     form = RenameCategory()
-    context = {'category_query': category_query, 'form': form}
+    context = {'category_query': category_query, 'title_high':title_high, 'form': form}
     return render(request, 'admin_pannel/AdminPanel_titlesname.html', context)
 
 
