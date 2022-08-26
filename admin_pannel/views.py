@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import context
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 from .forms import LoginForm, EditBreakingNews, EditNews, EditYoutube, AddCategoryNepali, RenameCategory, \
     Advertisement_Form, AddSubTitle_Form
 from apps_nepali.models import Advertisement, BreakingNews, Category, MainNews, LatestNews, YoutubeLink, StandardNews, \
@@ -18,7 +20,6 @@ def index(request):
     form = LoginForm()
     context = {'form': form}
     return render(request, 'admin_pannel/login_page.html', context)
-
 
 
 def admin_signup_post(request):
@@ -36,20 +37,20 @@ def admin_signup_post(request):
 
 def logout_post(request):
     logout(request)
-    message.success(request,"You are successfully logged out")
-    return redirect('admin_signup_post')
+    messages.success(request,"You are successfully logged out")
+    return redirect('ap_index')
 
-
+@login_required(login_url='/admin_login/')
 def ap_dashboard(request):
     return render(request, 'admin_pannel/AdminPanel_dashboard.html')
 
-
+@login_required(login_url='/admin_login/')
 def ap_layout_page(request):
     category_query = Category.objects.all().order_by('-id')
     context = {'category_query': category_query}
     return render(request, 'admin_pannel/landing_page.html', context)
 
-
+@login_required(login_url='/admin_login/')
 def ap_landing_page(request):
     category_query = Category.objects.all()
     context = {'category_query': category_query}
@@ -58,7 +59,7 @@ def ap_landing_page(request):
 
 # Adding Category Starts
 
-
+@login_required(login_url='/admin_login/')
 def ap_add_more_tittle(request):
     category_query = Category.objects.all()
     form = AddCategoryNepali()
@@ -113,7 +114,7 @@ def ap_sanghiya_page(request):
 
 # Youtube Section Starts
 
-
+@login_required(login_url='/admin_login/')
 def ap_youtube(request):
     category_query = Category.objects.all().order_by('-id')
     youtube_query = YoutubeLink.objects.all().order_by('-id')
@@ -275,7 +276,7 @@ def ap_add_breaking_news(request):
                'breaking_query': breaking_query, 'form': form}
     return render(request, 'admin_pannel/breaking_news/add_breaking_news.html', context)
 
-
+@login_required(login_url='/admin_login/')
 # adding breaking new post
 def ap_add_breaking_news_post(request):
     if request.method == 'POST':
@@ -362,7 +363,7 @@ def edit_ads(request):
     context = {'category_query': category_query}
     return render(request, 'admin_pannel/ads/edit_ads.html', context)
 
-
+@login_required(login_url='/admin_login/')
 def ads_list_page(request):
     category_query = Category.objects.all()
     ads_query = Advertisement.objects.all().order_by('-id')
@@ -434,7 +435,7 @@ def delete_ads_page(request, ids):
 
 # Category title name page starts
 
-
+@login_required(login_url='/admin_login/')
 def ap_titles_name(request):
     category_query = Category.objects.all()
     form = RenameCategory()
@@ -561,7 +562,7 @@ def delete_news_page(request, ids):
     news_query.delete()
     return redirect('ap_add_sub_title', ids=news_query.category.id)
 
-
+@login_required(login_url='/admin_login/')
 def ap_add_sub_title(request, ids):
     current_query = Category.objects.filter(id=ids).last()
     category_query = Category.objects.filter(parent_id=ids).order_by('-id')
