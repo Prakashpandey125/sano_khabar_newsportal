@@ -14,7 +14,7 @@
           </div>
           <div class="np_fnews_description_lr_time_mobile">
             <i class="far fa-clock" style="font-size: 17px"></i>
-            <p>{{i.time_uploaded}}</p>
+            <p>{{i.standard_news.time_uploaded}}</p>
           </div>
         </div>
         <!-- code for the mobile form to be displayed ends here -->
@@ -32,17 +32,73 @@
         <div class="np_fnews_description_lr">
           <div class="np_fnews_description_lr_time">
             <i class="far fa-clock" style="font-size: 17px"></i>
-            <p>{{i.time_uploaded}}</p>
+            <p>{{i.standard_news.time_uploaded}}</p>
           </div>
-
+          
           <div class="np_fnews_description_lr_ac">
             <a href="{% url 'nepali_per_page' i.standard_news_id %}">थप हेर्नुहोस</a>
           </div>
-
+          
         </div>
       </div>
       <!-- html code for the description part ends here -->
     </div>
 
   {% endfor %}
+  <!-- second news container -->
+  <!--  <div class="np_fnews_container">-->
+  <!--    <div class="np_fnews_imagepart">-->
+  <!--       <img src="{% static 'media/image/20180417PHT01917-cl.jpg' %}" alt="" />-->
+  <!--      &lt;!&ndash; code for the mobile form to be displayed start here&ndash;&gt;-->
+  <!--      <div class="mobile_content">-->
+  <!--        <div class="np_fnews_description_mhead_mobile">-->
+  <!--          <h2>हामी यस कारण दिदैनौ बन्चारए डाँडामा फोहोर फाल्न</h2>-->
+  <!--        </div>-->
+  <!--        <div class="np_fnews_description_lr_time_mobile">-->
+  <!--          <i class="far fa-clock" style="font-size: 17px;"></i>-->
+  <!--          <p>५ मिनट अगाडि</p>-->
+  <!--        </div>-->
+
+  <!--      </div>-->
+  <!--      &lt;!&ndash; code for the mobile form to be displayed ends here &ndash;&gt;-->
+  <!--    </div>-->
+
+  <!--    &lt;!&ndash; html code for the description part starts here &ndash;&gt;-->
+  <!--    <div class="np_fnews_description">-->
+  <!--      <div class="np_fnews_description_mhead">-->
+  <!--        <h1>हामी यस कारण दिदैनौ बन्चारए डाँडामा फोहोर फाल्न</h1>-->
+  <!--      </div>-->
+  <!--      <div class="np_fnews_description_mnews">-->
+  <!--        <p>-->
+  <!--          त्रिभुवन अन्तर्राष्ट्रिय विमानस्थलको आन्तरिक टर्मिनल स्टेसनमा-->
+  <!--          बुधबारदेखि सटल बस सेवा सुरु गरिएको छ । नेपाल नागरिक उड्डयन प्राधिकरण-->
+  <!--          र त्रिभुवन अन्तर्राष्ट्रिय विमानस्थल कार्यालयले तीनवटा माइक्रो बसलाई-->
+  <!--          सटल बसका रुपमा सञ्चालनमा ल्याएको हो। बुधबार बिहान ती बसको उद्घाटन-->
+  <!--          पर्यटनमन्त्री प्रेमबहादुर आलेले गर्नुभएको हो ।-->
+
+  <!--          त्रिभुवन अन्तर्राष्ट्रिय विमानस्थलको आन्तरिक टर्मिनल स्टेसनमा-->
+  <!--          बुधबारदेखि सटल बस सेवा सुरु गरिएको छ । नेपाल नागरिक उड्डयन प्राधिकरण-->
+  <!--          र त्रिभुवन अन्तर्राष्ट्रिय विमानस्थल कार्यालयले तीनवटा माइक्रो बसलाई-->
+  <!--          सटल बसका रुपमा सञ्चालनमा ल्याएको हो। बुधबार बिहान ती बसको उद्घाटन-->
+  <!--          पर्यटनमन्त्री प्रेमबहादुर आलेले गर्नुभएको हो ।-->
+
+  <!--          त्रिभुवन अन्तर्राष्ट्रिय विमानस्थलको आन्तरिक टर्मिनल स्टेसनमा-->
+  <!--          बुधबारदेखि सटल बस सेवा सुरु गरिएको छ । नेपाल नागरिक उड्डयन प्राधिकरण-->
+  <!--          र त्रिभुवन अन्तर्राष्ट्रिय विमानस्थल कार्यालयले तीनवटा माइक्रो बसलाई-->
+  <!--          सटल बसका रुपमा सञ्चालनमा ल्याएको हो। बुधबार बिहान ती बसको उद्घाटन-->
+  <!--          पर्यटनमन्त्री प्रेमबहादुर आलेले गर्नुभएको हो ।-->
+  <!--        </p>-->
+  <!--      </div>-->
+  <!--      <div class="np_fnews_description_lr">-->
+  <!--        <div class="np_fnews_description_lr_time">-->
+  <!--          <i class="far fa-clock" style="font-size: 17px;"></i>-->
+  <!--          <p>५ मिनट अगाडि</p>-->
+  <!--        </div>-->
+  <!--        <div class="np_fnews_description_lr_ac">-->
+  <!--          <a href="">थप हेर्नुहोस</a>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    &lt;!&ndash; html code for the description part ends here &ndash;&gt;-->
+  <!--  </div>-->
 </div>

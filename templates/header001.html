@@ -43,36 +43,63 @@
             <div class="np_nav_header_navbar_item">
                 <a class="nav_active" href="{% url 'nepali_index' %}">होमपेज</a>
             </div>
-            {% recursetree category_query %}
+            {% recursetree category_query %} {% if node.name == title %}
             <div class="np_nav_header_navbar_item">
-                <a href="{% url 'nepali_list_news' node.id %}">{{ node.name }}</a>
+                <a class="nav_active" href="{% url 'nepali_list_news' node.id %}"
+                >{{ node.name }}</a
+                >
+                {% comment %}  
                 <div class="nav_dropdown_content">
                     <a href="#">link1</a>
                     <a href="#">link1</a>
                     <a href="#">link1</a>
                 </div>
+                {% endcomment %}
             </div>
-           {% endrecursetree %}
+            {% else %}
+            <div class="np_nav_header_navbar_item">
+                <a href="{% url 'nepali_list_news' node.id %}">{{ node.name }}</a>
+                <div class="nav_dropdown_content">
+                     <a href="{% url 'nepali_list_news' node.id %}">{{category_query.name}}</a>
+                     <a href="#">link12</a> 
+                    
+                     {% comment %} #how to get subtitle name
+                   {% for category in category_query %}
+                   <a href="{% url 'nepali_list_news' category.id %}">{{category.name}}</a>
+                   {% endfor%}
+                   {% endcomment%}
+                </div>
+                
+                
+            </div>
+            {% endif %} {% endrecursetree %}
         </div>
     </div>
     <!-- Navigation Bar End -->
 
-    <!-- Header Navigation Bar End -->
-    <!--code for breaking news-->
-    <div class="ticker">
+<!-- Header Navigation Bar End -->
+<!--code for breaking news-->
+{% if breaking_query %}
+<div class="ticker">
+    
+    <div class="title">
+        <h3>ब्रेकिङ न्युज</h3>
+    </div>
 
-        <div class="title">
-            <h3>ब्रेकिङ न्युज</h3>
-        </div>
+    <div class="news">
+        <marquee>
+            <p>
+                        |
+                        {% for items in breaking_query %}
+                        |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{items.title}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+                        {% endfor %}
+                        |
+            </p>
 
-        <div class="news">
-            <marquee>
-                <p>
-                    My name is pandey.
-                </p>
-
-            </marquee>
-        </div>
-
+        </marquee>
     </div>
 </div>
+{% endif%}
+
+    

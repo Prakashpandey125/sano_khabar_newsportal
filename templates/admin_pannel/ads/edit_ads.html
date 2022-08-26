@@ -67,12 +67,13 @@
                                             name="filename"
                                             accept="image/*"
                                             id="file"
+                                            onchange="loadFile(event)"
                                             type="file"
                                           />
                                           Choose Image
                                         </div>
                                         <p class="ntc_upload_image_display">
-                                         {{form.photo_img}}
+                                          <img id="output" />
                                         </p>
                                       </label>
                                     </div>
@@ -94,4 +95,10 @@
 
 </div>
 </body>
+<script>
+    var loadFile = function (event) {
+      var image = document.getElementById("output");
+      image.src = URL.createObjectURL(event.target.files[0]);
+    };
+  </script>
 </html>

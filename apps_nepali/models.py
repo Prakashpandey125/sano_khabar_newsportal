@@ -34,7 +34,6 @@ class StandardNews(models.Model):
     description = RichTextUploadingField(default=' ')
     date_uploaded = models.DateField(default=datetime.now)
     time_uploaded = models.TimeField(default=datetime.now)
-    # date_time_picker = models.DateTimeField(default=datetime.now)
     number_of_views = models.BigIntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='standard_category')
     is_active = models.BooleanField(default=True, help_text='0:processing, 1:completed')
@@ -48,7 +47,7 @@ class MainNews(models.Model):
     time_uploaded = models.TimeField(default=datetime.now)
     date_time_picker = models.DateTimeField(default=datetime.now)
     number_of_views = models.BigIntegerField(default=0)
-    standard_news = models.OneToOneField(StandardNews, on_delete=models.CASCADE, related_name='main_news')
+    standard_news = models.OneToOneField(StandardNews , on_delete=models.CASCADE,related_name='main_news')
     is_active = models.BooleanField(default=True, help_text='0:processing, 1:completed')
 
     def __str__(self):
@@ -56,15 +55,9 @@ class MainNews(models.Model):
 
 
 class LatestNews(models.Model):
-    title = models.CharField(max_length=200, default='default')
-    editor_name = models.CharField(max_length=50, default='default')
-    location = models.CharField(max_length=20, default='default')
-    photo_img = models.ImageField(blank=True, null=True, upload_to='photos/StandardNews', default='default')
-    news_summary = SizedTextField(size_class=2, null=True)
-    description = RichTextUploadingField(default=' ')
     date_uploaded = models.DateField(default=datetime.now)
     time_uploaded = models.TimeField(default=datetime.now)
-    # date_time_picker = models.DateTimeField(default=datetime.now)
+    date_time_picker = models.DateTimeField(default=datetime.now)
     number_of_views = models.BigIntegerField(default=0)
     standard_news = models.OneToOneField(StandardNews, on_delete=models.CASCADE, related_name='latest_news')
     is_active = models.BooleanField(default=True, help_text='0:processing, 1:completed')
@@ -102,25 +95,23 @@ class Advertisement(models.Model):
     photo_img = models.ImageField(blank=True, null=True, upload_to='image/')
     date_uploaded = models.DateField(default=datetime.now)
     time_uploaded = models.TimeField(default=datetime.now)
+    
 
     def __str__(self):
-        return self.title
+        return self.title        
 
-    # add_sub_title models
-
-
+# add_sub_title models
 class AddSubTitle(models.Model):
+        
     title = models.CharField(max_length=200)
     date_uploaded = models.DateField(default=datetime.now)
     time_uploaded = models.TimeField(default=datetime.now)
+    #category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='ap_add_sub_title')
 
-    # category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='ap_add_sub_title')
-
-    # is_active = models.BooleanField(default=True, help_text='0:processing, 1:completed')
+    #is_active = models.BooleanField(default=True, help_text='0:processing, 1:completed')
 
     def __str__(self):
         return self.title
-
 
 class NewsComment(models.Model):
     class Meta:
@@ -131,6 +122,7 @@ class NewsComment(models.Model):
     email = models.CharField(max_length=50, null=True)
     uploaded_date_time = models.DateTimeField(default=datetime.now)
     news = models.ForeignKey(StandardNews, on_delete=models.CASCADE, related_name='news_comment')
+    
     is_active = models.BooleanField(default=True, help_text='0:processing, 1:completed')
 
     def __str__(self):

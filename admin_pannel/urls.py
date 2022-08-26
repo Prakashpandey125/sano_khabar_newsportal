@@ -6,6 +6,8 @@ urlpatterns = [
     path('', views.index, name='ap_index'),
     path('dashboard/', views.ap_dashboard, name='ap_dashboard'),
     path('admin_signup_post/', views.admin_signup_post, name='admin_signup_post'),
+     path('logout_post/', views.logout_post, name='logout_post'),
+
     path('landing_page/', views.ap_landing_page, name='ap_landing_page'),
     #main page of title name
     path('layout_page/', views.ap_layout_page, name='ap_layout_page'),

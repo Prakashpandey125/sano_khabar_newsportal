@@ -1,10 +1,11 @@
+from email import message
 import json
 from unicodedata import category, name
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import context
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, EditBreakingNews, EditNews, EditYoutube, AddCategoryNepali, RenameCategory, \
     Advertisement_Form, AddSubTitle_Form
 from apps_nepali.models import Advertisement, BreakingNews, Category, MainNews, LatestNews, YoutubeLink, StandardNews, \
@@ -19,6 +20,7 @@ def index(request):
     return render(request, 'admin_pannel/login_page.html', context)
 
 
+
 def admin_signup_post(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -31,6 +33,11 @@ def admin_signup_post(request):
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('ap_index')
+
+def logout_post(request):
+    logout(request)
+    message.success(request,"You are successfully logged out")
+    return redirect('admin_signup_post')
 
 
 def ap_dashboard(request):
@@ -219,24 +226,20 @@ def ap_main_news_page(request):
     category_query = Category.objects.all()
 
     main_news_query = MainNews.objects.all().order_by('-id')
+    
 
     context = {'category_query': category_query,
                'main_news_query': main_news_query}
     return render(request, 'admin_pannel/main_news/index.html', context)
 
+
 def ap_latest_news_page(request):
-    news_query = StandardNews.objects.all().order_by('-time_uploaded')
-    form = EditNews(request.POST)
     category_query = Category.objects.all()
-    # latest_news_query = LatestNews.objects.all().order_by('-time_uploaded')
-    # latest_news_query = LatestNews.objects.create(title=title, editor_name=editor_name, location=location,
-    #                                               news_summary=news_summary, description=description,
-    #                                               is_active=is_active, photo_img=photo_img)
-    # standard_news_query = StandardNews.objects.all().order_by('-id')
-    context = {'category_query': category_query, 'form': form, 'news_query': news_query,
-               # 'latest_news_query': latest_news_query
-               # 'standard_news_query': standard_news_query
-               }
+    news_query = StandardNews.objects.all().order_by('-id')
+    form = EditNews(request.POST)
+    
+    context = {'category_query': category_query,
+               'news_query': news_query, 'form':form}
     return render(request, 'admin_pannel/latestnews/index.html', context)
 
 
@@ -326,7 +329,7 @@ def delete_breaking_news_page(request, ids):
 
 
 def delete_main_news_page(request, ids):
-    main_news_query = MainNews.objects.get(id=ids)
+    main_news_query =StandardNews.objects.get(id=ids)
     main_news_query.delete()
     return redirect('ap_main_news_page')
 
@@ -492,18 +495,17 @@ def ap_add_news_post(request):
             print(category, '................')
             is_active = form.cleaned_data.get('is_active')
             photo_img = form.cleaned_data.get('photo_img')
-            date_time_picker = form.cleaned_data.get('date_time_picker')
-            # time_uploaded = form.cleaned_data.get('time_uploaded')
-            # number_of_views = form.cleaned_data.get('number_of_views')
+            #date_time_picker = form.cleaned_data.get('date_time_picker')
+           # time_uploaded = form.cleaned_data.get('time_uploaded')
+            #number_of_views = form.cleaned_data.get('number_of_views')
             news_query = StandardNews.objects.create(title=title, editor_name=editor_name, location=location,
                                                      news_summary=news_summary, description=description,
                                                      is_active=is_active, category=category, photo_img=photo_img)
-            # latest_news_query = LatestNews.objects.create(date_time_picker=date_time_picker,
-            #                                               time_uploaded=time_uploaded, number_of_views=number_of_views)
+            #latest_news_query = LatestNews.objects.create(date_time_picker=date_time_picker, number_of_views=number_of_views)
             # print(latest_news_query)
 
             news_query.save()
-            # latest_news_query.save()
+            #latest_news_query.save()
             return redirect('ap_add_sub_title', ids=category.id)
         else:
             print(form.errors)
