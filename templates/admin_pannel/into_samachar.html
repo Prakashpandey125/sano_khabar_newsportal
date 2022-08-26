@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Samachar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="{% static 'css/admin pannel/added title sub page.css' %}">-->
+    <link rel="stylesheet" href="{% static 'css/admin_pannel/layout_page.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-6.0.0-beta3-web/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_pannel/navbar.css' %}">
+    <script src="{% static 'js/admin_pannel.js' %}"></script>
+</head>
+<body>
+<div class="newsportal_adminpannel_maincontainer">
+    <!-- navbar starts -->
+        {% include 'admin_pannel/admin_panel_navbar.html' %}
+
+    <!-- navbar ends -->
+    <div class="newsportal_adminpannel_subcontainer">
+        <!-- sidebar starts -->
+              {% include 'admin_pannel/sidebar.html' %}
+
+        <!-- sidebar ends -->
+
+    </div>
+</div>
+</body>
+</html>
