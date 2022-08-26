@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/admin_pannel/layout_page.css' %}">
     <link rel="stylesheet" href="{% static 'fontawesome-free-6.0.0-beta3-web/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_pannel/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_pannel/sidebar.css' %}">
     <title>Main_News</title>
     <script src="{% static 'js/admin_pannel.js' %}"></script>
 </head>
@@ -51,13 +52,9 @@
                             <td>{{item.standard_news.editor_name}}</td>
                             <td>{{item.number_of_views}}</td>
                             <td>
-                                <a href="{% url 'admin_edit_news_page' item.standard_news.id %}">
-                                    <button class="np_ap_tf_title_viewbtn">Edit</button>
-                                </a>
                                 <a href="{% url 'admin_delete_main_news_page' item.standard_news.id %}">
                                 <button 
-                                class="np_ap_tf_title_deletebtn">Delete</button>
-<!--                                <button class="np_ap_tf_title_mainbtn_01">Main</button>-->                        
+                                class="np_ap_tf_title_deletebtn">Delete</button>                      
                                 </a>
                             </td>
                         </tr>
