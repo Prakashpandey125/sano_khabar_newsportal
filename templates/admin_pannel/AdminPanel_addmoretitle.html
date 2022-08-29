@@ -68,11 +68,12 @@
               <div class="np_ap_ntc_lname">
                 <label for="fname">Show in landing page</label>
               </div>
-              {% comment %} <div class="np_ap_ntc_lbutton">
+              <div class="np_ap_ntc_lbutton">
                 <input class="ntc_landing_btn" onclick="OpenDiv()">
                 
-              </div> {% endcomment %}
+              </div> 
             </div>
+            {% comment %}
             <!-- landing layout starts -->
              <!-- landing layout starts -->
 
@@ -104,18 +105,18 @@
                   <div class="np_ap_lp_layout">
                       <input type="radio" name="_section" id="_section3" value="3">
                       <label for="layout_3">
-                          <div class="np_ap_lp_layout1_p">
-                              <P>LAYOUT 3</P>
-                          </div>
-                          <div class="np_ap_ntc_lp_img1">
-                              <img src="{% static 'media/image/layout3 (2).png' %}" alt="Image_here">
-                          </div>
+                        <div class="np_ap_lp_layout1_p">
+                          <P>LAYOUT 3</P>
+                        </div>
+                        <div class="np_ap_ntc_lp_img1">
+                          <img src="{% static 'media/image/layout3 (2).png' %}" alt="Image_here">
+                        </div>
                       </label>
+                    </div>
                   </div>
-              </div>
-          </div>                    <!-- landing layout ends -->
-            <!-- <div id="form1" name="form1"> -->
-              {% comment %}
+                </div>                    <!-- landing layout ends -->
+                {% endcomment %}
+          <!-- <div id="form1" name="form1"> -->
             <div class="np_ap_ntc_landing_page" id="form1">
               <h6>Select Layout</h6>
               <select name="_section" id="_section_id">
@@ -124,11 +125,11 @@
                 <option value="2">Section2</option>
                 <option value="3">Section3</option>
               </select>
-            
+              {%comment%}
               <div class="np_ap_ntc_landing_page_img">
                 <div class="np_ap_ntc_lp_img1">
                   
-                  <p>                  
+                  <p> Layout1                 
                   </p>
                 </div>
                 <div class="np_ap_ntc_lp_img2">
@@ -138,10 +139,12 @@
                   <p>Layout3</p>
                 </div>
               </div>
+              {% endcomment%}
             </div>
-            {% endcomment %}
+            {% comment%}
             <!-- landing layout ends -->
             <!-- landing page ends -->
+            {% endcomment%}
 
             <!-- save button starts -->
 

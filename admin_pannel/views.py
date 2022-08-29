@@ -35,20 +35,25 @@ def admin_signup_post(request):
             messages.error(request, 'Invalid Credentials')
             return redirect('ap_index')
 
+
 def logout_post(request):
-    logout(request)
-    messages.success(request,"You are successfully logged out")
+    if request.method == 'POST':
+        logout(request)
+        messages.success(request, "You are logged out")
     return redirect('ap_index')
+
 
 @login_required(login_url='/admin_login/')
 def ap_dashboard(request):
     return render(request, 'admin_pannel/AdminPanel_dashboard.html')
+
 
 @login_required(login_url='/admin_login/')
 def ap_layout_page(request):
     category_query = Category.objects.all().order_by('-id')
     context = {'category_query': category_query}
     return render(request, 'admin_pannel/landing_page.html', context)
+
 
 @login_required(login_url='/admin_login/')
 def ap_landing_page(request):
@@ -68,6 +73,7 @@ def ap_add_more_tittle(request):
     return render(request, 'admin_pannel/AdminPanel_addmoretitle.html', context)
 
 
+@login_required(login_url='/admin_login/')
 def add_more_post(request):
     if request.method == 'POST':
         form = AddCategoryNepali(request.POST)
@@ -98,7 +104,7 @@ def add_more_post(request):
 
 
 # Adding category ends
-
+@login_required(login_url='/admin_login/')
 def ap_layout_page(request):
     category_query = Category.objects.filter(level=0).order_by('-id')
     context = {'category_query': category_query}
@@ -125,7 +131,7 @@ def ap_youtube(request):
 
 # page to add youtube news
 
-
+@login_required(login_url='/admin_login/')
 def ap_add_youtube(request):
     category_query = Category.objects.all()
     youtube_query = YoutubeLink.objects.all().order_by('-id')
@@ -137,7 +143,7 @@ def ap_add_youtube(request):
 
 # adding youtube news
 
-
+@login_required(login_url='/admin_login/')
 def ap_add_youtube_news(request):
     if request.method == 'POST':
         form = EditYoutube(request.POST)
@@ -156,6 +162,7 @@ def ap_add_youtube_news(request):
             return redirect('ap_add_youtube')
 
 
+@login_required(login_url='/admin_login/')
 def edit_youtube_page(request, ids):
     youtube_query = YoutubeLink.objects.get(id=ids)
     form = EditYoutube(instance=youtube_query)
@@ -193,7 +200,7 @@ def delete_youtube_page(request, ids):
 
 # Youtube Section Ends
 
-
+@login_required(login_url='/admin_login/')
 def ap_edit_breaking_news_page(request, ids):
     category_query = Category.objects.all()
     breaking_news_query = BreakingNews.objects.get(id=ids)
@@ -223,24 +230,25 @@ def edit_breaking_news_page_post(request, ids):
             print(form.errors)
 
 
+@login_required(login_url='/admin_login/')
 def ap_main_news_page(request):
     category_query = Category.objects.all()
 
     main_news_query = MainNews.objects.all().order_by('-id')
-    
 
     context = {'category_query': category_query,
                'main_news_query': main_news_query}
     return render(request, 'admin_pannel/main_news/index.html', context)
 
 
+@login_required(login_url='/admin_login/')
 def ap_latest_news_page(request):
     category_query = Category.objects.all()
     news_query = StandardNews.objects.all().order_by('-id')
     form = EditNews(request.POST)
-    
+
     context = {'category_query': category_query,
-               'news_query': news_query, 'form':form}
+               'news_query': news_query, 'form': form}
     return render(request, 'admin_pannel/latestnews/index.html', context)
 
 
@@ -275,6 +283,7 @@ def ap_add_breaking_news(request):
     context = {'category_query': category_query,
                'breaking_query': breaking_query, 'form': form}
     return render(request, 'admin_pannel/breaking_news/add_breaking_news.html', context)
+
 
 @login_required(login_url='/admin_login/')
 # adding breaking new post
@@ -330,7 +339,7 @@ def delete_breaking_news_page(request, ids):
 
 
 def delete_main_news_page(request, ids):
-    main_news_query =StandardNews.objects.get(id=ids)
+    main_news_query = StandardNews.objects.get(id=ids)
     main_news_query.delete()
     return redirect('ap_main_news_page')
 
@@ -362,6 +371,7 @@ def edit_ads(request):
     category_query = Category.objects.all()
     context = {'category_query': category_query}
     return render(request, 'admin_pannel/ads/edit_ads.html', context)
+
 
 @login_required(login_url='/admin_login/')
 def ads_list_page(request):
@@ -484,29 +494,18 @@ def ap_add_news_post(request):
         form = EditNews(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data.get('title')
-            print(title, '................')
             editor_name = form.cleaned_data.get('editor_name')
-            print(editor_name, '................')
             location = form.cleaned_data.get('location')
-            print(location, '................')
             news_summary = form.cleaned_data.get('news_summary')
-            print(news_summary, '................')
             description = form.cleaned_data.get('description')
             category = form.cleaned_data.get('category')
-            print(category, '................')
             is_active = form.cleaned_data.get('is_active')
             photo_img = form.cleaned_data.get('photo_img')
-            #date_time_picker = form.cleaned_data.get('date_time_picker')
-           # time_uploaded = form.cleaned_data.get('time_uploaded')
-            #number_of_views = form.cleaned_data.get('number_of_views')
             news_query = StandardNews.objects.create(title=title, editor_name=editor_name, location=location,
                                                      news_summary=news_summary, description=description,
                                                      is_active=is_active, category=category, photo_img=photo_img)
-            #latest_news_query = LatestNews.objects.create(date_time_picker=date_time_picker, number_of_views=number_of_views)
-            # print(latest_news_query)
 
             news_query.save()
-            #latest_news_query.save()
             return redirect('ap_add_sub_title', ids=category.id)
         else:
             print(form.errors)
@@ -562,11 +561,11 @@ def delete_news_page(request, ids):
     news_query.delete()
     return redirect('ap_add_sub_title', ids=news_query.category.id)
 
+
 @login_required(login_url='/admin_login/')
 def ap_add_sub_title(request, ids):
     current_query = Category.objects.filter(id=ids).last()
     category_query = Category.objects.filter(parent_id=ids).order_by('-id')
-
     news_query = StandardNews.objects.filter(category=current_query)
     print(category_query, '................')
     form = AddSubTitle()
@@ -585,8 +584,9 @@ def ap_add_sub_title_post(request, ids):
         if form.is_valid():
             name = form.cleaned_data.get('title')
             print(name, '......t..........')
-            current_catergory = Category.objects.get(id=ids)
-            sub_title_query = Category.objects.create(name=name, parent=current_catergory)
+            current_category = Category.objects.get(id=ids)
+            sub_title_query = Category.objects.create(
+                name=name, parent=current_category)
             sub_title_query.save()
             print(ids)
             return redirect('ap_add_sub_title', ids)

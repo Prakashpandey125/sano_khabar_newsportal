@@ -23,6 +23,8 @@ def latest_dates_np(value):
 
 def index(request):
     category_query = Category.objects.all().order_by('id')
+    #current_category = Category.objects.all()
+
     breaking_query= BreakingNews.objects.all().order_by('id')
     # standard_news_query = StandardNews.objects.all()
     section_1 = StandardNews.objects.filter(
@@ -125,6 +127,7 @@ def per_page(request, ids):
 
 def list_news(request, ids):
     category_query = Category.objects.all().order_by('id')
+    current_category = Category.objects.get(id=ids)
     category_news_query = StandardNews.objects.filter(
         Q(category__id=ids) | Q(category__parent_id=ids))
     category_query1 = Category.objects.filter(id=ids).last()
@@ -145,7 +148,7 @@ def list_news(request, ids):
         page_obj_current_news = paginator_current_news.page(paginator_current_news.num_pages)
 
 
-    context = {'category_news_query': page_obj_current_news, 'category_query': category_query,
+    context = {'category_news_query': page_obj_current_news, 'category_query': category_query,'current_category': current_category,
                'category_query1': category_query1, 'latest_news_query': latest_news_query, 'section_3': section_3,
                'section3_name': section3_name, 'youtube_link_query': youtube_link_query}
     return render(request, 'list.html', context)
@@ -165,6 +168,8 @@ def post_comment(request,ids):
         
         news_comment = NewsComment(user_name=user_name, comment=comment, email=email, news_id=ids)
         news_comment.save()
-        return redirect('per_page' ,ids)
+        return redirect('per_page',ids)
+
+
 
     

@@ -59,16 +59,17 @@
             {% else %}
             <div class="np_nav_header_navbar_item">
                 <a href="{% url 'nepali_list_news' node.id %}">{{ node.name }}</a>
+                {% if not node.is_leaf_node %}
                 <div class="nav_dropdown_content">
-                     <a href="{% url 'nepali_list_news' node.id %}">{{category_query.name}}</a>
-                     <a href="#">link12</a> 
-                    
+                     <a href="{% url 'nepali_list_news' node.id %}">{{children}}</a>
+                     
+                     
                      {% comment %} #how to get subtitle name
-                   {% for category in category_query %}
-                   <a href="{% url 'nepali_list_news' category.id %}">{{category.name}}</a>
-                   {% endfor%}
-                   {% endcomment%}
-                </div>
+                     {% for category in category_query %}
+                     <a href="{% url 'nepali_list_news' category.id %}">{{category.name}}</a>
+                     {% endcomment%}
+                    </div>
+                {% endif %}
                 
                 
             </div>
